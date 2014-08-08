@@ -291,9 +291,9 @@ public class OpticalFlow {
 			b+=i ;
 		}
 
-		//solve [a c]P = [d] to get search direction
-		//		[c b]    [f]
-		double det = a*b - c*c ;
+		//solve [2a 2c]P = [d] to get search direction
+		//	[2c 2b]    [f]
+		double det = 2*( a*b - c*c) ;
 		if(Math.abs(det) > 0.000001){
 			double p[] = {-(b*d-c*f)/det, -(f*a-c*d)/det} ;//cramer's rule for solving 2x2 system
 			double np[] =new double[2];
