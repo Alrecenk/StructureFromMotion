@@ -254,14 +254,20 @@ public class Utility {
 		double g[] = new double[radius*2+1] ;
 		double theta = radius/3.0 ;
 		double oneovertwothetasquared = 1.0/(2*theta*theta);
-		double sqrt = Math.sqrt(oneovertwothetasquared/Math.PI) ;
+		double total = 0 ;
 		for(int x=-radius;x<=radius;x++){
-			g[x+radius] = sqrt*Math.exp(-oneovertwothetasquared*x*x) ;
+			g[x+radius] = Math.exp(-oneovertwothetasquared*x*x) ;
+			total+=g[x+radius] ;
+		}
+		total = 1.0/total ;
+		for(int x=-radius;x<=radius;x++){
+			g[x+radius]*=total ;
 		}
 		return g ;
 	}
 	
-	//TODO header
+	
+	//Applies a convolution kernel in both dimensions, mainly used for blurring images
 	public static float[][][] applykernel(float[][][] i, double kernel[]){
 		float[][][] i2 = new float[i.length][i[0].length][i[0][0].length];
 		int radius = (kernel.length - 1 )/2 ;
