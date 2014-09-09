@@ -253,9 +253,10 @@ public class Utility {
 	public static double[] gaussian(int radius){
 		double g[] = new double[radius*2+1] ;
 		double theta = radius/3.0 ;
-		double oneovertwothetasquared = 1/(2*theta*theta);
+		double oneovertwothetasquared = 1.0/(2*theta*theta);
+		double sqrt = Math.sqrt(oneovertwothetasquared/Math.PI) ;
 		for(int x=-radius;x<=radius;x++){
-			g[x+radius] = oneovertwothetasquared/Math.PI*Math.exp(-oneovertwothetasquared*x*x) ;
+			g[x+radius] = sqrt*Math.exp(-oneovertwothetasquared*x*x) ;
 		}
 		return g ;
 	}
